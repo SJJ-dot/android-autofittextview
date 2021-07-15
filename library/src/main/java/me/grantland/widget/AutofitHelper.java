@@ -3,6 +3,7 @@ package me.grantland.widget;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Paint;
 import android.os.Build;
 import android.text.Editable;
 import android.text.Layout;
@@ -16,6 +17,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -121,7 +123,24 @@ public class AutofitHelper {
 
         paint.set(view.getPaint());
         paint.setTextSize(size);
-
+        //region
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        if (layoutParams != null && layoutParams.height != ViewGroup.LayoutParams.WRAP_CONTENT) {
+            Paint.FontMetrics fontMetrics = paint.getFontMetrics();
+            int h = view.getHeight();
+            if (h < fontMetrics.descent - fontMetrics.ascent) {
+                int fixSize = h;
+                paint.setTextSize(fixSize);
+                Paint.FontMetrics fm = paint.getFontMetrics();
+                while (h < fm.descent - fm.ascent && fixSize > minTextSize) {
+                    paint.setTextSize(--fixSize);
+                    fm = paint.getFontMetrics();
+                }
+                size = fixSize;
+                high = fixSize;
+            }
+        }
+        //endregion
         if ((maxLines == 1 && paint.measureText(text, 0, text.length()) > targetWidth)
                 || getLineCount(text, paint, size, targetWidth, displayMetrics) > maxLines) {
             size = getAutofitTextSize(text, paint, targetWidth, maxLines, low, high, precision,

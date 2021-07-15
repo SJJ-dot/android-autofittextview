@@ -54,7 +54,7 @@
                 <me.grantland.widget.AutofitTextView
                     android:id="@+id/output_autofit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:text="@string/example"
                     android:textSize="50sp"
                     android:gravity="center"
