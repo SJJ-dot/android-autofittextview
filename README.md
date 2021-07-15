@@ -19,7 +19,7 @@ A TextView that automatically resizes text to fit perfectly within its bounds.
 	}
     
 	dependencies {
-	        implementation 'com.github.SJJ-dot:android-autofittextview:0.2.2'
+	        implementation 'com.github.SJJ-dot:android-autofittextview:x.x.x'
 	} 
 ```
 
