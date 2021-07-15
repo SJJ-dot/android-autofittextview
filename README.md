@@ -1,6 +1,7 @@
 # AutoFitTextView
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/me.grantland/autofittextview/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/me.grantland/autofittextview)
+[![](https://jitpack.io/v/SJJ-dot/android-autofittextview.svg)](https://jitpack.io/#SJJ-dot/android-autofittextview)
+
 
 A TextView that automatically resizes text to fit perfectly within its bounds.
 
@@ -10,9 +11,16 @@ A TextView that automatically resizes text to fit perfectly within its bounds.
 ## Usage
 
 ```cson
-dependencies {
-    compile 'me.grantland:autofittextview:0.2.+'
-}
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+    
+	dependencies {
+	        implementation 'com.github.SJJ-dot:android-autofittextview:0.2.2'
+	} 
 ```
 
 Enable any View extending TextView in code:
