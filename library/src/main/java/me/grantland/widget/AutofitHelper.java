@@ -92,14 +92,21 @@ public class AutofitHelper {
      */
     private static void autofit(TextView view, TextPaint paint, float minTextSize, float maxTextSize,
                                 int maxLines, float precision) {
-        if (maxLines <= 0 || maxLines == Integer.MAX_VALUE) {
-            // Don't auto-size since there's no limit on lines.
-            return;
-        }
 
         int targetWidth = view.getWidth() - view.getPaddingLeft() - view.getPaddingRight();
         if (targetWidth <= 0) {
             return;
+        }
+
+        if (maxLines <= 0 || maxLines == Integer.MAX_VALUE) {
+            ViewGroup.LayoutParams params = view.getLayoutParams();
+            if (maxLines == Integer.MAX_VALUE &&
+                    params != null && params.height != ViewGroup.LayoutParams.WRAP_CONTENT) {
+                maxLines = 1;
+            } else {
+                // Don't auto-size since there's no limit on lines.
+                return;
+            }
         }
 
         CharSequence text = view.getText();
